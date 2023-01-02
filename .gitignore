@@ -1,2 +1,3 @@
 /media/Image
-/.sqlite3
+/migrations
+.sqlite3
