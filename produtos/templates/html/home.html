@@ -11,13 +11,17 @@
   </head>
   <body>
     <div class="container">
-        <h4 class="titleCategory">{{pro.categoria|upper}}</h4>
+        <h4 class="titleCategory">{{categoria_produto|upper}}</h4>
         <div class="row">
             {% for p in produtos %}
                 <div class="card" style="width: 18rem;">
                     <img src="{{p.photo_do_produto.url}}" class="card-img-top" alt="{{p.photo_do_produto}}">
                     <div class="card-body">
-                    <h5 class="card-title">{{p.nome_do_produto}}</h5>
+                        <div class="row">
+                            <h5 class="card-title">{{p.nome_do_produto}}</h5>
+                            
+                            <h5 class="card-title">R$: {{p.valor_do_produto}}</h5>
+                        </div>
                     <p class="card-text">{{p.descricao_do_produto}}</p>
                     <a href="#" class="btn btn-primary">Adicionar</a>
                     </div>
@@ -27,14 +31,19 @@
     </div>
 
     <div class="container">
-        <h4 class="titleCategory">{{refri.categoria|upper}}</h4>
+        <h4 class="titleCategory">{{categoria_refrigerante|upper}}</h4>
         <div class="row">
             {% for r in refrigerante %}
             
                 <div class="card" style="width: 18rem;">
                     <img src="{{r.photo_do_produto.url}}" class="card-img-top" alt="{{r.photo_do_produto}}">
                     <div class="card-body">
-                    <h5 class="card-title">{{r.nome_do_produto}}</h5>
+                        <div class="row">
+                            <h5 class="card-title">{{r.nome_do_produto}}</h5>
+                            
+                            
+                            <h5 class="card-title">R$: {{r.valor_do_produto}}</h5>
+                        </div>
                     <p class="card-text">{{r.descricao_do_produto}}</p>
                     <a href="#" class="btn btn-primary">Adicionar</a>
                     </div>
@@ -44,14 +53,19 @@
     </div>
 
     <div class="container">
-        <h4 class="titleCategory">{{s.categoria|upper}}</h4>
+        <h4 class="titleCategory">{{categoria_suco|upper}}</h4>
         <div class="row">
             {% for s in sucos %}
             
                 <div class="card" style="width: 18rem;">
                     <img src="{{s.photo_do_produto.url}}" class="card-img-top" alt="{{s.photo_do_produto}}">
                     <div class="card-body">
-                    <h5 class="card-title">{{s.nome_do_produto}}</h5>
+                        <div class="row">
+                            <h5 class="card-title">{{s.nome_do_produto}}</h5>
+                            
+                            
+                            <h5 class="card-title">R$: {{s.valor_do_produto}}</h5>
+                        </div>
                     <p class="card-text">{{s.descricao_do_produto}}</p>
                     <a href="#" class="btn btn-primary">Adicionar</a>
                     </div>

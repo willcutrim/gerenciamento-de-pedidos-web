@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render
 from .models import Produtos, Categoria
 
 def index_pro(request):
@@ -10,11 +10,18 @@ def index_pro(request):
     refrigerante = Produtos.objects.filter(categoria=1)
     sucos = Produtos.objects.filter(categoria=3)
 
-    
-    for s in sucos:
-       pass
-    for pro in produtos:
-       pass
-    for refri in refrigerante:
-        pass
-    return render(request, 'html/home.html', {'produtos': produtos, 'refrigerante': refrigerante, 'refri': refri, 'pro': pro, 'sucos': sucos, 's': s})
+    for suco, pro, refri in zip(sucos, produtos, refrigerante):
+        categoria_suco = suco.categoria
+        categoria_produto = pro.categoria
+        categoria_refrigerante = refri.categoria
+
+    context = {
+        'produtos': produtos, 
+        'refrigerante': refrigerante, 
+        'categoria_refrigerante': categoria_refrigerante, 
+        'categoria_produto': categoria_produto, 
+        'sucos': sucos, 
+        'categoria_suco': categoria_suco
+    }
+
+    return render(request, 'html/home.html', context)
