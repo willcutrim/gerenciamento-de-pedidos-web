@@ -18,12 +18,12 @@
                     <img src="{{p.photo_do_produto.url}}" class="card-img-top" alt="{{p.photo_do_produto}}">
                     <div class="card-body">
                         <div class="row">
-                            <h5 class="card-title">{{p.nome_do_produto}}</h5>
+                            <h5 class="card-title" value="{{p.nome_do_produto}}" id="nome_ham">{{p.nome_do_produto}}</h5>
                             
                             <h5 class="card-title">R$: {{p.valor_do_produto}}</h5>
                         </div>
                     <p class="card-text">{{p.descricao_do_produto}}</p>
-                    <a href="#" class="btn btn-primary">Adicionar</a>
+                    <a onclick="addToCartBtnHam()" class="btn btn-primary">Adicionar</a>
                     </div>
                 </div>
             {% endfor %}
@@ -39,13 +39,13 @@
                     <img src="{{r.photo_do_produto.url}}" class="card-img-top" alt="{{r.photo_do_produto}}">
                     <div class="card-body">
                         <div class="row">
-                            <h5 class="card-title">{{r.nome_do_produto}}</h5>
+                            <h5 class="card-title" value="`{{r.id}}" id="nome_ref">{{r.nome_do_produto}}</h5>
                             
                             
                             <h5 class="card-title">R$: {{r.valor_do_produto}}</h5>
                         </div>
                     <p class="card-text">{{r.descricao_do_produto}}</p>
-                    <a href="#" class="btn btn-primary">Adicionar</a>
+                    <a onclick="addToCartBtnRef()" class="btn btn-primary">Adicionar</a>
                     </div>
                 </div>
             {% endfor %}
@@ -56,23 +56,25 @@
         <h4 class="titleCategory">{{categoria_suco|upper}}</h4>
         <div class="row">
             {% for s in sucos %}
-            
+            {% csrf_token %}
                 <div class="card" style="width: 18rem;">
                     <img src="{{s.photo_do_produto.url}}" class="card-img-top" alt="{{s.photo_do_produto}}">
                     <div class="card-body">
                         <div class="row">
-                            <h5 class="card-title">{{s.nome_do_produto}}</h5>
+                            <h5 class="card-title" value="`{{s.nome_do_produto}}" id="nome_su">{{s.nome_do_produto}}</h5>
                             
                             
                             <h5 class="card-title">R$: {{s.valor_do_produto}}</h5>
                         </div>
-                    <p class="card-text">{{s.descricao_do_produto}}</p>
-                    <a href="#" class="btn btn-primary">Adicionar</a>
+                        <p class="card-text">{{s.descricao_do_produto}}</p>
+                        <button class="btn btn-primary">Adicionar</button>
                     </div>
-                </div>
+                </div>  
             {% endfor %}
         </div>
     </div>
+    
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
   </body>
 </html>

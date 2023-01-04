@@ -1,22 +1,29 @@
 .container{
     border-radius: 8px;
-    background-color: red;
-    
+    background-color: rebeccapurple;
     margin-top: 10px;
     margin-bottom: 10px;
-    
+
     padding-top: 10px;
     padding-bottom: 10px;
 }
 
 .row{
     flex-direction: row;
+    justify-content: space-between;
 }
 
 .card{
     margin: 10px;
+    
 }
 
 .titleCategory{
     color: white;
 }
+
+.titleNumeroMesa{
+    color: white;
+    
+}
+

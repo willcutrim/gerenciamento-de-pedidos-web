@@ -1,7 +1,7 @@
 .container{
     border-radius: 8px;
-    background-color: red;
-    
+    background-color: rgb(44, 199, 176);
+   
     margin-top: 10px;
     margin-bottom: 10px;
     
@@ -11,6 +11,7 @@
 
 .row{
     flex-direction: row;
+
 }
 
 .card{
