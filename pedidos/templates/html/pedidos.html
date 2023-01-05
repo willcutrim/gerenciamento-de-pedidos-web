@@ -13,7 +13,7 @@
     <div class="container">
       <div class="row"> 
         {% for pedido in pedidos %}
-          <div class="col-md-6 col-xl-4" id="coluna">
+          <div class="col-md-4" id="coluna">
             <h4 class="titleNumeroMesa" id="titleNumeroMesa">Mesa {{pedido.numero_da_mesa}}</h4>
             <div class="card" style="width: 18rem;">
               <div class="card-body">
@@ -22,7 +22,7 @@
                       
                       <h5 class="card-title">R$: {{pedido.valor_da_compra}}</h5>
                   </div>
-                <a href="{% url 'pedidos-detalhe' pedido.pk%}" class="btn btn-primary">detalhe</a>
+                  <a href="{% url 'pedidos-detalhe' pedido.pk%}" class="btn btn-primary">detalhe</a>
               </div>
             </div>
           </div>

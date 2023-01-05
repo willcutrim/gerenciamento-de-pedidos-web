@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     # apps
     'pedidos',
     'produtos',
+
+    #api
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -53,6 +56,14 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        # 'rest_framework.permissions.DjangoModelPermissions'
+    ]
+}
 
 ROOT_URLCONF = 'gerenciamento_de_pedidos.urls'
 
