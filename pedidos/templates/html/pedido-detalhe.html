@@ -15,9 +15,14 @@
       <div class="row">
         <div class="card" style="width: 18rem;">
           <div class="row">
-            <p class="card-text">{{pedidos}}</p>
-            <h5 class="card-title">R$: {{pedido_detalhe.valor_da_compra}}</h5>
-          </div>
+            <div class="col-6">
+            <h5 class="card-title">Pedidos: </h5>
+            </div>
+            <div class="col-6">
+              <p class="card-text">{{pedidos}}</p>
+              </div>
+            </div>
+          <h5 class="card-title" id="valor">R$: {{pedido_detalhe.valor_da_compra}}</h5>
           <form method="post">{% csrf_token %}
             {{form.as_p}}
             <button type="submit" class="btn btn-primary" id="btn-fechar">Fechar pedido</button>

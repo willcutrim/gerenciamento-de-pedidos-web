@@ -1,6 +1,6 @@
 .container{
     border-radius: 8px;
-    background-color: rebeccapurple;
+    background-color: #663399;
     margin-top: 10px;
     margin-bottom: 10px;
 
@@ -20,6 +20,7 @@
 
 .titleCategory{
     color: white;
+
 }
 
 .titleNumeroMesa{
@@ -27,3 +28,10 @@
     
 }
 
+#btn-fechar{
+    margin-bottom: 15px;
+}
+
+#valor{
+    margin-top: 15px;
+}
