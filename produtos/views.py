@@ -1,6 +1,10 @@
 from django.shortcuts import render
 from .models import Produtos, Categoria
 
+
+from django.contrib.auth.decorators import login_required
+
+@login_required
 def index_pro(request):
     categoria = Categoria.objects.filter(id=2)
     
