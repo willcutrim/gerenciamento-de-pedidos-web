@@ -2,12 +2,17 @@ from django.shortcuts import redirect, render, HttpResponse
 from .forms import FormPedido
 from .models import Pedidos
 
+from django.contrib.auth.decorators import login_required
 
+
+@login_required(login_url="/usuario/login/")
 def index(request):
     pedido = Pedidos.objects.filter(status_de_pagamento='pendente').order_by('numero_da_mesa')
     
     return render(request, 'html/pedidos.html', {'pedidos': pedido})
 
+    
+@login_required(login_url="/usuario/login/")
 def pedido_detalhe(request, id):
     pedido_detalhe = Pedidos.objects.get(id=id)
     pedidos = ", ".join([str(pe) for pe in pedido_detalhe.pedidos.all()])

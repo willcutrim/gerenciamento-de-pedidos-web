@@ -28,15 +28,20 @@ def cadastro_usuario(request):
 
 
 def login(request):
+    
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
 
         user = authenticate(username=username, password=password)
-
+        url = request.GET.get('next')
         if user:
             login_django(request, user)
-            return redirect('/produtos/')
+            if url != None:
+                return redirect(url)
+            else:
+                return redirect('/produtos/')
+            
         else:
             return HttpResponse('email ou senha invalida')
     return render(request, 'html/login.html')
