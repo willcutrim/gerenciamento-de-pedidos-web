@@ -1,6 +1,6 @@
 from django.db import models
 from produtos.models import Produtos
-
+from django.contrib.auth.models import User
 class Pedidos(models.Model):
 
     STATUS_PAGAMENTO = (
@@ -8,7 +8,7 @@ class Pedidos(models.Model):
         ('pendente', 'Pendente'),
     )
 
-
+    usuario = models.CharField(max_length=150)
     pedidos = models.ManyToManyField(Produtos, blank=True, related_name="pedidos")
     numero_da_mesa = models.IntegerField()
     nome_do_cliente = models.CharField(max_length=150)

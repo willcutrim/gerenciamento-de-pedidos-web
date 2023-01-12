@@ -1,10 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth.models import User
-# from django.http import HttpResponseRedirect
-# from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, logout as logout_django, login as login_django
 
 
 def cadastro_usuario(request):
+    
     if request.method == 'POST':
         try:
             usuario_exists = User.objects.get(email=request.POST.get('email'))
@@ -15,29 +16,39 @@ def cadastro_usuario(request):
             email = request.POST.get('email')
             password = request.POST.get('password')
             
+
             novo_usuario = User.objects.create_user(username=username, email=email, password=password)
 
             novo_usuario.save()
+            return redirect('/produtos/')
             
         
     return render(request, 'html/cadastro_usuario.html')
 
 
 
-# @require_POST
-# def entrar(request):
-#     usuario_aux = User.objects.get(email=request.POST['email'])
-#     usuario = authenticate(username=usuario_aux.username,
-#                            password=request.POST["senha"])
-#     if usuario is not None:
-#         login(request, usuario)
-#         return HttpResponseRedirect('/home/')
+def login(request):
+    
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
 
-#     return HttpResponseRedirect('/')
+        user = authenticate(username=username, password=password)
+        url = request.GET.get('next')
+        if user:
+            login_django(request, user)
+            if url != None:
+                return redirect(url)
+            else:
+                return redirect('/produtos/')
+            
+        else:
+            return HttpResponse('email ou senha invalida')
+    return render(request, 'html/login.html')
 
 
-# def index(request):
-#     if request.user.is_authenticated:
-#         return HttpResponseRedirect("/home/")
-#     else:
-#         return render(request, "caminho para index.html")
+@login_required(login_url="/usuario/login/")
+def logout(request):
+    if request.user.is_authenticated:
+        logout_django(request)
+        return redirect('login/')

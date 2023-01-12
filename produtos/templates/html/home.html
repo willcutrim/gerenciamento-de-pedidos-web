@@ -11,6 +11,8 @@
   </head>
   <body>
     <div class="container">
+        <h4 class="titleCategory">{{user|upper}}</h4>
+        <a href="{% url 'login'%}">Sair</a>
         <h4 class="titleCategory">{{categoria_produto|upper}}</h4>
         <div class="row">
             {% for p in produtos %}

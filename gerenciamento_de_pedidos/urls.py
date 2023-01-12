@@ -28,7 +28,7 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include(router.urls)),
 
-    path('cadastro-usuario/', include('usuario.urls')),
+    path('usuario/', include('usuario.urls')),
 
 
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
