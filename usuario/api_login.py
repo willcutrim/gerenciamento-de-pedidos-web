@@ -26,7 +26,18 @@ class ObterToken(APIView):
         if user is not None:
             tokens = create_jwt_pair_for_user(user)
             user_name = self.get_user(username)
-            response = {'message': "Login sucesso", 'tokens': tokens, 'user': str(user_name)}
+            response = {
+                'message': "Login sucesso", 
+                'tokens': tokens,
+                
+                'user': {
+                    'id': str(user_name.id), 
+                    'username': str(user_name), 
+                    'email': str(user_name.email)
+                }
+                
+                
+            }
             return Response(data=response, status=status.HTTP_200_OK)
 
         else:
