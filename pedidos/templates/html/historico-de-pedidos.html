@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Histórico de pedidos {% endblock %}
+
+{% block content %}
+    <div class="row">
+        {% for pedido in all_pedidos %}
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-success shadow h-100 py-2">
+                    <div class="card-body">
+                        <div>
+                            <h3><strong>Mesa: {{pedido.numero_da_mesa}}</strong></h3>
+                            <h3><strong>Cliente: {{pedido.nome_do_cliente}}</strong></h3>
+                        </div>
+                    <div>
+                        <h3><strong>Status: {{pedido.status_de_pagamento}}</strong></h3>
+                    </div>
+                </div>
+                <div class="text-xs font-weight-bold text-uppercase ml-4">
+                    <p>{{pedido.data_do_pedido|date:"d/m/Y - H:i"  }}</p>
+                </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

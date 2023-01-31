@@ -5,26 +5,26 @@ cadastrar usuário
 {% endblock %}
 
 {% block content%}
-    <div class="container">
-        <div class="box">
-            <div class="box-title">
-                <h1 class="title">Cadastrar usuario</h1>
-            </div>
-            <form method="post"> {% csrf_token %}
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Usuario" aria-label="Username" aria-describedby="basic-addon1" name="username">
-                </div>
-                
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="E-mail" aria-label="Recipient's username" aria-describedby="basic-addon2" name="email">
-                </div>
-
-                <div class="input-group mb-3">
-                    <input type="password" class="form-control" aria-label="Default" placeholder="Senha" aria-describedby="inputGroup-sizing-default" name="password" >
-                </div> 
-                
-                <button type="submit" class="btn btn-primary">Cadastrar</button>
-            </form>
+    
+    <div class="col-12">
+        <div class="box-title">
+            <h1 class="title">Cadastrar usuario</h1>
         </div>
+        <form method="post"> {% csrf_token %}
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Usuario" aria-label="Username" aria-describedby="basic-addon1" name="username">
+            </div>
+            
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="E-mail" aria-label="Recipient's username" aria-describedby="basic-addon2" name="email">
+            </div>
+
+            <div class="input-group mb-3">
+                <input type="password" class="form-control" aria-label="Default" placeholder="Senha" aria-describedby="inputGroup-sizing-default" name="password" >
+            </div> 
+            
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+        </form>
     </div>
+    
 {% endblock %}

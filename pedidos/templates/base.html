@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="{% static 'css/styleProduto.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
     <link href={% static "fontawesome-free/css/all.min.css"%} rel="stylesheet" type="text/css">
     <title>{% block title %} {% endblock %}</title>
     <link href="{% static 'bootstrap/sb-admin-2.min.css' %}" rel="stylesheet" type="text/css">
@@ -36,14 +37,14 @@
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                 aria-expanded="true" aria-controls="collapseTwo">
-                
-                <span>Cadastrar Produtos</span>
+                <i class="fas fa-fw fa-plus"></i>
+                <span>Produtos</span>
             </a>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Custom Components:</h6>
-                    <a class="collapse-item" href="buttons.html">Buttons</a>
-                    <a class="collapse-item" href="cards.html">Cards</a>
+                    <h6 class="collapse-header">Seção produtos:</h6>
+                    <a class="collapse-item" href="buttons.html">Ver Produtos</a>
+                    <a class="collapse-item" href="cards.html">Cadastrar produtos</a>
                 </div>
             </div>
         </li>
@@ -51,8 +52,8 @@
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                 aria-expanded="true" aria-controls="collapsePages">
-                
-                <span>Cadastrar usuários</span>
+                <i class="fas fa-fw fa-user"></i>
+                <span>Usuários</span>
             </a>
             <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
@@ -66,15 +67,12 @@
       {% endif %}
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-          <a class="nav-link collapsed" href="#" data-toggle="collapse"
-              aria-expanded="true" aria-controls="collapsePages">
-              
-              <span>Histórico de pedidos</span>
-          </a>
-      </li>
-
-      
-
+        <a class="nav-link collapsed" href="{% url 'historico-de-pedidos' %}" 
+            aria-expanded="true" aria-controls="collapseUtilities">
+            <i class="fas fa-fw fa-calendar"></i>
+            <span>Histórico de pedidos</span>
+        </a>
+    </li>
 
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
@@ -90,7 +88,7 @@
 
     <!-- Main Content -->
   <div id="content">
-  <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow" style="width: 100%; height: 12%">
+  <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
     <!-- Sidebar Toggle (Topbar) -->
     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
@@ -99,17 +97,18 @@
 
     <!-- Topbar Search -->
     <form
-        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-        <div class="input-group">
-            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                aria-label="Search" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
-                    <i class="fas fa-search fa-sm"></i>
-                </button>
-            </div>
+    class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+    <div class="input-group">
+        <input type="text" class="form-control bg-light border-0 small" placeholder="Buscar..."
+            aria-label="Search" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="button">
+                <i class="fas fa-search fa-sm"></i>
+            </button>
         </div>
-    </form>
+    </div>
+  </form>
+    
 
     <!-- Topbar Navbar -->
     <ul class="navbar-nav ml-auto">
@@ -165,16 +164,32 @@
 
     </ul>
   </nav>
-  <div class="container-fluid">
 
-    {% block content%}
+    <div class="container-fluid">
 
-    {% endblock content%}
+        {% block content%}
+
+        {% endblock content%}
+
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="sticky-footer bg-white">
+    <div class="container my-auto">
+        <div class="copyright text-center my-auto">
+            <span>W-Sistemas</span>
+        </div>
+    </div>
+</footer>
+<!-- End of Footer -->
 
 </div>
 </div>
-</div>
-</div>
+
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
   <!-- Bootstrap core JavaScript-->
   <script src={% static "jquery/jquery.min.js"%}></script>
   <script src={% static "bootstrap/js/bootstrap.bundle.min.js"%}></script>

@@ -7,10 +7,10 @@ from django.contrib.auth.decorators import login_required
 
 @login_required(login_url="/usuario/login/")
 def index(request):
-    pedido = Pedidos.objects.filter(status_de_pagamento='pendente').order_by('numero_da_mesa')
+    pedidos = Pedidos.objects.all().order_by('numero_da_mesa')
     user = request.user
     
-    return render(request, 'html/pedidos.html', {'pedidos': pedido, 'user': user})
+    return render(request, 'html/pedidos.html', {'pedidos': pedidos, 'user': user})
 
     
 @login_required
@@ -26,3 +26,7 @@ def pedido_detalhe(request, id):
     else:
         form = FormPedido()
     return render(request, 'html/pedido-detalhe.html', {'pedidos': pedidos, 'pedido_detalhe': pedido_detalhe, 'form': form})
+
+def historico_de_pedidos(request):
+    all_pedidos = Pedidos.objects.filter(status_de_pagamento='pago')
+    return render(request, 'html/historico-de-pedidos.html', {'all_pedidos': all_pedidos})
