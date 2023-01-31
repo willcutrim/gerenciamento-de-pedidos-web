@@ -8,11 +8,12 @@ from django.contrib.auth.decorators import login_required
 @login_required(login_url="/usuario/login/")
 def index(request):
     pedido = Pedidos.objects.filter(status_de_pagamento='pendente').order_by('numero_da_mesa')
+    user = request.user
     
-    return render(request, 'html/pedidos.html', {'pedidos': pedido})
+    return render(request, 'html/pedidos.html', {'pedidos': pedido, 'user': user})
 
     
-@login_required(login_url="/usuario/login/")
+@login_required
 def pedido_detalhe(request, id):
     pedido_detalhe = Pedidos.objects.get(id=id)
     pedidos = ", ".join([str(pe) for pe in pedido_detalhe.pedidos.all()])

@@ -1,59 +1,36 @@
+{% load static %}
 <!doctype html>
-<html lang="en">
+<html lang="pt-br">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/styleUser.css' %}">
     <title>Login</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-
-    <style>
-        .container {
-            display: flex;
-            margin: 100px;
-            
-            justify-content: center;
-            align-items: center;
-            
-        }
-        .box{
-            background-color: #663399;
-            border-radius: 8px;
-            width: 75%;
-            
-            padding: 100px;
-        }
-        .box-title{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .title{
-            
-            color: #fff;
-        }
-
-    </style>
   </head>
   <body>
-    <div class="container">
+    <div class="container-login">
         <div class="box">
-            <div class="box-title">
+            <div class='div-img'>
+                <img src="{% static 'img/logo.png' %}" class="img-logo" alt="imagem">
+            </div>
+            <div class="title-login">
                 <h1 class="title">Login</h1>
             </div>
+            
             <form method="post"> {% csrf_token %}
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Usuario" aria-label="Username" aria-describedby="basic-addon1" name="username">
+                    <input type="text" class="username" placeholder="Usuario" aria-label="Username" aria-describedby="basic-addon1" name="username" >
                 </div>
 
+                
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" aria-label="Default" placeholder="Senha" aria-describedby="inputGroup-sizing-default" name="password">
+                    <input type="text" class="password" aria-label="Default" placeholder="Senha" aria-describedby="inputGroup-sizing-default" name="password">
                 </div> 
                 
-                <button type="submit" class="btn btn-primary">Login</button>
-                <a class="btn btn-light" href="{% url 'cadastrar-usuario'%}">Criar conta</a>
+                <button type="submit" class="btn-login">Login</button>
             </form>
+        
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    
   </body>
 </html>
