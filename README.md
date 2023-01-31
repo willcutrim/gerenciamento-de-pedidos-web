@@ -1,5 +1,3 @@
-# Freelancer criando para uma lanchonet parceira.
-## Back-end do projeto.
+# Freelancer criando para uma lanchonete parceira.
 
-### Link da aplicação Mobile.
-https://github.com/willcutrim/AppGerenciamentoDePedidos
+![gerencia](https://user-images.githubusercontent.com/37386568/215894674-b750793a-7440-4baa-b438-cf40db1c7f47.png)
