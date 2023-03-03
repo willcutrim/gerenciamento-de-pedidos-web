@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, logout as logout_django, login as login_django
 
+from usuario.models import AvatarUser
+
 
 @login_required(login_url="/usuario/login/")
 def cadastro_usuario(request):
@@ -20,7 +22,9 @@ def cadastro_usuario(request):
 
             novo_usuario = User.objects.create_user(username=username, email=email, password=password)
             novo_usuario.save()
-            return redirect('/pedidos/') 
+            avatar = AvatarUser.objects.create(pk=novo_usuario.pk)
+            avatar.save()
+            return redirect('/') 
     return render(request, 'html/cadastro_usuario.html')
 
 
@@ -42,7 +46,7 @@ def login(request):
             if url != None:
                 return redirect(url)
             else:
-                return redirect('/pedidos/')
+                return redirect('/')
             
         else:
             return HttpResponse('email ou senha invalida')

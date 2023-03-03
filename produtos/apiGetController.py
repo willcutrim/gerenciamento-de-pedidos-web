@@ -10,7 +10,7 @@ from rest_framework.permissions import IsAuthenticated
 
 
 class ProdutosGet(APIView):
-    permission_classes = [IsAuthenticated]
+    
     def get(self, request):
         produtos = Produtos.objects.all()
         serializer = ProdutosSerializer(produtos, many=True)
@@ -18,7 +18,7 @@ class ProdutosGet(APIView):
 
 
 class ProdutoDetail(APIView):
-    permission_classes = [IsAuthenticated]
+    
     def get_produto(self, id):
         try:
             return Produtos.objects.get(id=id)

@@ -1,35 +1,82 @@
-{% load static %}
-<!doctype html>
-<html lang="pt-br">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{% static 'css/styleProduto.css' %}" type="text/css">
-    <title>Detalhe do pedido</title>
-    <link href="{% static 'bootstrap/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+{% extends 'C:\Users\willyam cutrim\gerenciamento_de_pedidos\pedidos\templates\base.html' %}
+{% load bootstrap5 %}
 
-  </head>
-  <body>
-    <div class="container">
-      <h4 class="titleCategory">Mesa {{pedido_detalhe.numero_da_mesa}}</h4>
-      <div class="row">
-        <div class="card" style="width: 18rem;">
-          <div class="row">
-            <div class="col-6">
-            <h5 class="card-title">Pedidos: </h5>
-            </div>
-            <div class="col-6">
-              <p class="card-text">{{pedidos}}</p>
-              </div>
-            </div>
-          <h5 class="card-title" id="valor">R$: {{pedido_detalhe.valor_da_compra}}</h5>
-          <form method="post">{% csrf_token %}
-            {{form.as_p}}
-            <button type="submit" class="btn btn-primary" id="btn-fechar">Fechar pedido</button>
-          </form>
-        </div>
+{% block title %}
+Pedido - {{pedido_detalhe.nome_do_cliente}}
+{% endblock %}
+
+{% block content%}
+  <div class="col-12">
+    <a href="{% url 'index' %}">
+      <i class="fas fa-chevron-left fa-sm"></i>
+    </a>
+    {% for i in pedido_detalhe %}
+    
+      <h3 class="mt-2"><strong>Mesa: {{ i.numero_da_mesa }} - {{i.nome_do_cliente}}</strong></h3>
+      {% if i.status_de_pagamento == 'pendente'%}
+        <div class="card border-left-danger shadow h-100">
+      {% else %}
+        <div class="card border-left-success shadow h-100">
+      {% endif %}
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">id - pedido</th>
+              <th scope="col">Pedidos</th>
+              <th scope="col">Total</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr>
+                <th scope="row">{{i.pk}}</th>
+                <td>{{pedidos}}</td>
+                <td>{{i.valor_da_compra}}</td>
+                <form method="post">{% csrf_token %}
+                  
+                <td>{{form.status_de_pagamento}}</td>
+              </tr>
+          </tbody>
+        </table>
       </div>
-    </div> 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-  </body>
-</html>
+          <button type="submit" class="btn btn-success mt-2">Fechar pedido</button>
+        </form>
+    {% endfor %} 
+  </div>
+{% endblock %}
+
+
+
+
+{% comment %} <div class="col-12">
+  {% for i in test%}
+  <p>{{i.nome_do_cliente}}</p>
+  {% endfor %}
+  <h3><strong>Mesa: 0{{ pedido_detalhe.numero_da_mesa }}</strong></h3>
+  
+  <div class="card">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">Pedidos</th>
+          <th scope="col">Total</th>
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+          <tr>
+            <th scope="row">{{pedido_detalhe.pk}}</th>
+            <td>{{pedidos}}</td>
+            <td>{{pedido_detalhe.valor_da_compra}}</td>
+            
+            <form method="post">{% csrf_token %}
+            <td>{{form.status_de_pagamento}}</td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+      <button type="submit" class="btn btn-success mt-2">Fechar pedido</button>
+    </form>
+</div> {% endcomment %}
