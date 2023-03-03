@@ -2,6 +2,16 @@
 
 {% block title %}Home {% endblock %}
 
+{% block useuario%}
+  <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{user}}</span>
+      <img class="img-profile rounded-circle"
+          src="{{ avatar.avatar.url }}">
+  </a>
+                
+{% endblock%}
+
 {% block content %}
   <div class="row">
     {% for pedido in pedidos %}
@@ -13,7 +23,9 @@
         {% endif %}
           <div class="card-body">
             <div>
-              <h3><strong>Mesa: {{pedido.numero_da_mesa}}</strong></h3>
+              
+              <h3><strong>Mesa: {{numero_da_mesa}}</strong></h3>
+              
               <h3><strong>Cliente: {{pedido.nome_do_cliente}}</strong></h3>
             </div>
             <div>
@@ -23,12 +35,11 @@
               <div class="row">
                 <div class="col">
                   <div class="text-xs font-weight-bold text-primary text-uppercase">
-                    <a href="#"class="btn btn-primary btn-sm">Detalhes</a>
+                    <a href="{% url 'pedidos-detalhe' pedido.pk %}"class="btn btn-primary btn-sm">Detalhes</a>
                   </div>
                 </div>
                 <div class="text-xs font-weight-bold text-uppercase">
                   <p>{{pedido.data_do_pedido|date:"d/m/Y - H:i"  }}</p>
-                  
                 </div>
               </div>
             </div>

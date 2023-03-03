@@ -24,11 +24,11 @@ class ObterToken(APIView):
         user = authenticate(username=username, password=password)
 
         if user is not None:
-            tokens = create_jwt_pair_for_user(user)
+            # tokens = create_jwt_pair_for_user(user)
             user_name = self.get_user(username)
             response = {
                 'message': "Login sucesso", 
-                'tokens': tokens,
+                # 'tokens': tokens,
                 
                 'user': {
                     'id': str(user_name.id), 
@@ -42,8 +42,3 @@ class ObterToken(APIView):
 
         else:
             return Response(data={"message": "Usuário ou senha inválida."})
-
-    # def get(self, request: Request):
-    #     content = {"user": str(request.user), "auth": str(request.user.email)}
-
-    #     return Response(data=content, status=status.HTTP_200_OK)

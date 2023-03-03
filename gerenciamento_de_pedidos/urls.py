@@ -9,7 +9,7 @@ from rest_framework import routers
 from produtos.viewset import ProdutosViewSet
 
 router = routers.DefaultRouter()
-router.register('produtos', ProdutosViewSet)
+router.register('       ', ProdutosViewSet)
 
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -21,7 +21,7 @@ from rest_framework_simplejwt.views import (
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    path('pedidos/', include('pedidos.urls')),
+    path('', include('pedidos.urls')),
     path('produtos/', include('produtos.urls')),
 
 

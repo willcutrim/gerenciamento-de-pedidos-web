@@ -9,7 +9,7 @@ from pedidos.serializers import PedidosSerializer
 from rest_framework.permissions import IsAuthenticated
 
 class PedidosList(APIView):
-    permission_classes = [IsAuthenticated]
+    
     def get(self, request):
         pedidos = Pedidos.objects.all()
         serializer = PedidosSerializer(pedidos, many=True)
