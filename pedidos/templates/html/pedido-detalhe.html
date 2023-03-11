@@ -10,10 +10,9 @@ Pedido - {{pedido_detalhe.nome_do_cliente}}
     <a href="{% url 'index' %}">
       <i class="fas fa-chevron-left fa-sm"></i>
     </a>
-    {% for i in pedido_detalhe %}
     
-      <h3 class="mt-2"><strong>Mesa: {{ i.numero_da_mesa }} - {{i.nome_do_cliente}}</strong></h3>
-      {% if i.status_de_pagamento == 'pendente'%}
+      <h3 class="mt-2"><strong>Mesa: {{ pedido_detalhe.numero_da_mesa }} - {{pedido_detalhe.nome_do_cliente}}</strong></h3>
+      {% if pedido_detalhe.status_de_pagamento == 'pendente'%}
         <div class="card border-left-danger shadow h-100">
       {% else %}
         <div class="card border-left-success shadow h-100">
@@ -29,9 +28,9 @@ Pedido - {{pedido_detalhe.nome_do_cliente}}
           </thead>
           <tbody>
               <tr>
-                <th scope="row">{{i.pk}}</th>
-                <td>{{pedidos}}</td>
-                <td>{{i.valor_da_compra}}</td>
+                <th scope="row">{{pedido_detalhe.pk}}</th>
+                <td>{{pedido_detalhe.pedidos}}</td>
+                <td>{{pedido_detalhe.valor_da_compra}}</td>
                 <form method="post">{% csrf_token %}
                   
                 <td>{{form.status_de_pagamento}}</td>
@@ -41,7 +40,7 @@ Pedido - {{pedido_detalhe.nome_do_cliente}}
       </div>
           <button type="submit" class="btn btn-success mt-2">Fechar pedido</button>
         </form>
-    {% endfor %} 
+    
   </div>
 {% endblock %}
 
