@@ -1,4 +1,3 @@
-
 from django.http import Http404
 from rest_framework import status
 from rest_framework.views import APIView
@@ -15,11 +14,10 @@ class PedidosList(APIView):
         serializer = PedidosSerializer(pedidos, many=True)
         return Response(serializer.data)
 
+class PedidoCreate(APIView):
     def post(self, request):
         serializer = PedidosSerializer(data=request.data, many=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_404_NOT_FOUND)
-
-
