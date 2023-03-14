@@ -33,7 +33,16 @@ Pedido - {{pedido_detalhe.nome_do_cliente}}
                 <td>{{pedido_detalhe.valor_da_compra}}</td>
                 <form method="post">{% csrf_token %}
                   
-                <td>{{form.status_de_pagamento}}</td>
+                  <td>
+                    <select name="status_de_pagamento" id="id_status_de_pagamento">
+                      <option value="" selected="">{{pedido_detalhe.status_de_pagamento}}</option>
+                      {% if pedido_detalhe.status_de_pagamento == 'pago'%}
+                        <option value="pendente">Pendente</option>
+                      {% else %}
+                        <option value="pago">Pago</option>
+                      {% endif %}
+                    </select>
+                  </td>
               </tr>
           </tbody>
         </table>

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de produtos{% endblock %}
+
+{% block useuario%}
+  <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{user}}</span>
+  </a>
+                
+{% endblock%}
+
+{% block content %}
+  <div class="col-12">
+    <div class="row" style="gap: 10px; justify-content: center;">
+    {% for produto in produtos%}
+      <div class="card" style="width: 12rem;">
+        <div class="container" style="background-color: #D9D9D9; box-shadow: 1px 1px 4px #bfbfbf;">
+          <div class="col">
+            <img class="card-img-top" style="width: 120px; height: 140px; object-fit: contain;" src="{{ produto.photo_do_produto.url }}" alt="Card image prod">
+          </div>
+
+        </div>
+        <div class="card-body" >
+          <div class="col" style="justify-content: center;" >
+
+            <h5 class="card-title">{{produto.nome_do_produto}}</h5>
+            <p class="card-text">{{produto.descricao_do_produto}}</p>
+            <a href="#" class="btn btn-primary">Detalhe</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  </div>
+{% endblock %}

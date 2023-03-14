@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from .models import Produtos, Categoria
 from django.contrib.auth.models import User
-
+from django.contrib import messages
+from .forms import ProdutoForm
 from django.contrib.auth.decorators import login_required
 
 
@@ -31,3 +32,28 @@ def index_pro(request):
     }
 
     return render(request, 'html/home.html', context)
+
+
+
+@login_required(login_url="/usuario/login/")
+def cadastrar_produtos(request):
+    if request.method == "POST":
+        form = ProdutoForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Cadastrado com sucesso!')
+            return redirect('cadastrar_produtos')
+        else:
+            # Adicionar mensagem de erro
+            messages.error(request, 'Erro ao enviar informações')
+    else:
+        form = ProdutoForm()
+    return render(request, 'html/cadastrar_produtos.html', {'form': form})
+
+
+@login_required(login_url="/usuario/login/")
+def list_produtos(request):
+    produtos = Produtos.objects.all()
+    return render(request, 'html/list_produtos.html', {'produtos': produtos})
+

@@ -3,7 +3,7 @@ from pedidos.serializers import PedidosSerializer
 from produtos.models import Produtos
 from .forms import FormPedido
 from .models import Pedidos
-from usuario.models import AvatarUser
+
 from django.contrib.auth.decorators import login_required
 
 
@@ -11,25 +11,15 @@ from django.contrib.auth.decorators import login_required
 def index(request):
     pedidos = Pedidos.objects.filter(status_de_pagamento='pendente')
     user = request.user
-    for i in pedidos:
-        print(i.numero_da_mesa)
-    # if AvatarUser.avatar:
-    #     print('ta sem imagem')
-    #     avatar = 'C:\\Users\\willyam cutrim\\gerenciamento_de_pedidos\\media\\Image\\user_default.jpg'
-
-    # else:
-    avatar = AvatarUser.objects.get(pk=user.pk)
-    # avatar = 'Image\\user_default.jpg'
-
-    return render(request, 'html/pedidos.html', {'pedidos': pedidos, 'user': user, 'avatar': avatar})
+    
+    return render(request, 'html/pedidos.html', {'pedidos': pedidos, 'user': user})
 
     
 @login_required(login_url="/usuario/login/")
 def pedido_detalhe(request, pk):
     pedido_detalhe = Pedidos.objects.get(pk=pk)
-
-    # for i in pedido_detalhe:
-    #     pedidos = ", ".join([str(pe) for pe in i.pedidos.all()])
+    
+    # print(pedido_detalhe.status_de_pagamento[0:].capitalize())
     
     if request.method == "POST":
         form = FormPedido(request.POST, instance=pedido_detalhe)

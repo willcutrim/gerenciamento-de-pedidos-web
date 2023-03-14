@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+{% block title %}Cadastrar produtos{% endblock %}
+
+{% block useuario%}
+  <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{user}}</span>
+  </a>
+{% endblock%}
+
+{% block content %}
+  <div class="container">
+    <h2 class="text-center alert alert-info">Cadastrar produtos</h2>
+      {% if messages %}
+        <div class="messages">
+          {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          {% endfor %}
+        </div>
+    
+        <script>
+          var timeout = 4000;
+    
+          setTimeout(function() {
+            var messages = document.querySelector('.messages');
+            if (messages) {
+              messages.style.opacity = '0';
+              setTimeout(function() {
+                messages.style.display = 'none';
+              }, 500);
+            }
+          }, timeout);
+        </script>
+    {% endif %}
+
+    <form method="post" enctype="multipart/form-data"> {% csrf_token %}
+      {% bootstrap_form form %}
+      {% bootstrap_button button_type="submit" content="Cadastrar"%}
+    </form>
+  </div>
+{% endblock %}

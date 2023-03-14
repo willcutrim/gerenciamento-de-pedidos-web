@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, logout as logout_django, login as login_django
 
-from usuario.models import AvatarUser
+
 
 
 @login_required(login_url="/usuario/login/")
@@ -22,8 +22,7 @@ def cadastro_usuario(request):
 
             novo_usuario = User.objects.create_user(username=username, email=email, password=password)
             novo_usuario.save()
-            avatar = AvatarUser.objects.create(pk=novo_usuario.pk)
-            avatar.save()
+            
             return redirect('/') 
     return render(request, 'html/cadastro_usuario.html')
 
@@ -32,6 +31,8 @@ def cadastro_usuario(request):
 def user_list(request):
     users = User.objects.filter(is_superuser=False)
     return render(request, 'html/user_list.html', {'users': users})
+
+
 
 def login(request):
     
