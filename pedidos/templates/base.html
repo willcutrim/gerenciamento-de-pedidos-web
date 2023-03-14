@@ -1,9 +1,11 @@
 {% load static %}
 {% load bootstrap5 %}
+
 <!doctype html>
 <html lang="pt-br">
   <head>
     <meta charset="utf-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="{% static 'css/styleProduto.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
@@ -44,8 +46,8 @@
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Seção produtos:</h6>
-                    <a class="collapse-item" href="buttons.html">Ver Produtos</a>
-                    <a class="collapse-item" href="cards.html">Cadastrar produtos</a>
+                    <a class="collapse-item" href="{% url 'list_produtos'%}">Ver Produtos</a>
+                    <a class="collapse-item" href="{% url 'cadastrar_produtos'%}">Cadastrar produtos</a>
                 </div>
             </div>
         </li>
