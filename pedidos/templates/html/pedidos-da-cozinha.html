@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Cozinha {% endblock %}
+
+{% block content %}
+<h1 class="text-center alert alert-info">Pedidos</h1>
+    <div class="row">
+        {% for pedido in pedidos %}
+        
+            <div class="col-xl-3 col-md-6 mb-4">
+                {% if pedido.status_do_pedido == 'pendente'%}
+                <div class="card border-left-danger shadow h-100 py-2">
+                {% elif pedido.status_do_pedido == 'preparando' %}
+                <div class="card border-left-warning shadow h-100 py-2">
+                {% else %}
+                <div class="card border-left-success shadow h-100 py-2">
+                {% endif%}
+                    <div class="card-body">
+                        <div>
+                            <h3><strong>Mesa: {{pedido.numero_da_mesa}}</strong></h3>
+                            <h3><strong>Cliente: {{pedido.nome_do_cliente}}</strong></h3>
+                        </div>
+                    <div>
+                        <h3><strong>Status: {{pedido.status_do_pedido}}</strong></h3>
+                    </div>
+                </div>
+                <div class="col no-gutters align-items-center">
+                    <div class="col">
+                        <div class="d-flex justify-content-between">
+                            <div class="text-xs font-weight-bold text-uppercase">
+                                <p>{{pedido.data_do_pedido|date:"d/m/Y - H:i"  }}</p>    
+                            </div>
+                            <a href="{% url 'pedidos-detalhe-cozinha' pedido.pk %}"class="btn btn-primary btn-sm text-uppercase">Detalhes</a>
+                      
+                        </div>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

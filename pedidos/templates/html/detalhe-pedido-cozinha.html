@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}Pedido {{pedido.numero_da_mesa}} {% endblock %}
+
+{% block content %}
+<h1 class="text-center alert alert-info">Pedido - {{pedido.numero_da_mesa}}</h1>
+<div class="col-12">
+    <h3><strong>Mesa: 0{{ pedido.numero_da_mesa }}</strong></h3>
+    
+    <div class="card">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">Pedidos</th>
+            <th scope="col">Total</th>
+            <th scope="col">Status do pedido</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+            <tr>
+              <th scope="row">{{pedido.pk}}</th>
+              <td>
+                {% for i in list_pedidos%}
+                    <p>{{i}}</p>
+                {% endfor %}
+            </td>
+              <td>{{pedido.valor_da_compra}}</td>
+              
+              <form method="post">{% csrf_token %}
+                <td>
+                  <select name="status_do_pedido" id="id_status_do_pedido">
+                    <option value="{{pedido.status_do_pedido}}" selected="">{{pedido.status_do_pedido}}</option>
+                    {% if pedido.status_do_pedido == 'pendente'%}
+                    
+                    <option value="preparando">Preparando</option>
+                  
+                    <option value="pronto">Pronto</option>
+                    {% else %}
+                    <option value="pendente">Pendente</option>
+                  
+                    <option value="pronto">Pronto</option>
+                  {% endif%}
+                  </select>
+                </td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+        <button type="submit" class="btn btn-success mt-2">mudar status</button>
+      </form>
+    </div>
+{% endblock %}
+
+{% comment %} 
+{% if pedido.status_do_pedido == 'pendente'%}
+                      <option value="pendente">Pendente</option>
+                      {% elif pedido.status_do_pedido == 'preparando'%}
+                      <option value="preparando">preparando</option>
+                      {% elif pedido.status_do_pedido == 'pronto'%}
+                      <option value="pronto">Pronto</option>
+                      {% endif %} {% endcomment %}
