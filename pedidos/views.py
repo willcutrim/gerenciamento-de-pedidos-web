@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, render, HttpResponse
 from pedidos.serializers import PedidosSerializer
 from produtos.models import Produtos
+from django.contrib import messages
 from .forms import FormPedido, FormStatusPedido
 from .models import Pedidos
 from django.db.models import Q
@@ -46,9 +47,17 @@ def pedido_cozinha_detalhe(request, pk):
     
     if request.method == "POST":
         form = FormStatusPedido(request.POST, instance=pedido)
+        
         if form.is_valid():
             form.save()
-            return redirect('pedidos-cozinha')
+            if form.data['status_do_pedido'] == 'pronto':
+                return redirect('pedidos-cozinha')
+            else:
+                messages.success(request, 'PEDIDO ALTERADO COM SUCESSO!')
+            # return redirect(f'pedidos-detalhe-cozinha/{pk}')
+        else:
+            # Adicionar mensagem de erro
+            messages.error(request, 'Erro ao enviar informações')
     else:
         form = FormStatusPedido(instance=pedido)
     return render(request, 'html/detalhe-pedido-cozinha.html', {'pedido': pedido, 'form': form, 'list_pedidos':list_pedidos})
