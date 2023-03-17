@@ -4,9 +4,15 @@
 
 {% block content %}
 <h1 class="text-center alert alert-info">Pedidos</h1>
+<hr class="sidebar-divider">
     <div class="row">
-        {% for pedido in pedidos %}
+        {% if pedidos|length == 0%}
+        <div style="display: flex; flex: 1; justify-content: center; align-items: center; height: 65vh">
+            <h1>Vazio</h1>
+        </div>
+        {% else %}
         
+        {% for pedido in pedidos %}
             <div class="col-xl-3 col-md-6 mb-4">
                 {% if pedido.status_do_pedido == 'pendente'%}
                 <div class="card border-left-danger shadow h-100 py-2">
@@ -39,5 +45,6 @@
                 </div>
             </div>
         {% endfor %}
+        {% endif%}
     </div>
 {% endblock %}
