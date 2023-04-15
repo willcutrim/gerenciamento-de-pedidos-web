@@ -19,7 +19,7 @@ def index(request):
 @login_required(login_url="/usuario/login/")
 def pedido_detalhe(request, pk):
     pedido_detalhe = Pedidos.objects.get(pk=pk)
-    
+    list_pedidos = pedido_detalhe.pedidos.all()
     # print(pedido_detalhe.status_de_pagamento[0:].capitalize())
     
     if request.method == "POST":
@@ -29,22 +29,25 @@ def pedido_detalhe(request, pk):
             return redirect(F'/pedidos-detalhe/{pk}')
     else:
         form = FormPedido()
-    return render(request, 'html/pedido-detalhe.html', { 'pedido_detalhe': pedido_detalhe, 'form': form, })
+    return render(request, 'html/pedido-detalhe.html', { 'pedido_detalhe': pedido_detalhe, 'form': form, 'list_pedidos': list_pedidos })
+
+
 
 def historico_de_pedidos(request):
     all_pedidos = Pedidos.objects.filter(status_de_pagamento='pago')
     return render(request, 'html/historico-de-pedidos.html', {'all_pedidos': all_pedidos})
 
 
-def pedidos_da_cozinha(request):
-    pedidos = Pedidos.objects.filter(Q(status_do_pedido='pendente') | Q(status_do_pedido='preparando'))
 
-    return render(request, 'html/pedidos-da-cozinha.html', {'pedidos': pedidos})
+
+def pedidos_da_cozinha(request):
+    return render(request, 'html/pedidos-da-cozinha.html')
+
+
 
 def pedido_cozinha_detalhe(request, pk):
     pedido = Pedidos.objects.get(pk=pk)
     list_pedidos = pedido.pedidos.all()
-    
     if request.method == "POST":
         form = FormStatusPedido(request.POST, instance=pedido)
         

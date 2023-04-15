@@ -26,12 +26,14 @@ SECRET_KEY = 'django-insecure-p!@m@f#z#g4abm+r$=&m7_9y8$z608kga34-ekp4imsf8g1e@#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['10.0.2.2', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['10.0.2.2', '127.0.0.1', 'localhost', '192.168.200.114']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'channels',
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -85,7 +87,15 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'gerenciamento_de_pedidos.wsgi.application'
+ASGI_APPLICATION = 'gerenciamento_de_pedidos.asgi.application'
 
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+    }
+    
+}
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases

@@ -3,7 +3,7 @@ from produtos.models import Produtos
 from django.contrib.auth.models import User
 
 from django.db.models.signals import post_save
-from django.dispatch import receiver
+
 
 class Pedidos(models.Model):
 
@@ -34,6 +34,7 @@ class Pedidos(models.Model):
             self.status_do_pedido = 'pendente'
         super().save(*args, **kwargs)
 
+    
 
     def __str__(self):
         return str(self.numero_da_mesa) + ' --- ' + self.nome_do_cliente

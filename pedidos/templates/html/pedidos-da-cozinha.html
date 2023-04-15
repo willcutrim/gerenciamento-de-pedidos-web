@@ -3,40 +3,28 @@
 {% block title %}Cozinha {% endblock %}
 
 {% block content %}
-<h1 class="text-center alert alert-info">Pedidos</h1>
-<hr class="sidebar-divider">
-    <div class="row">
-        {% if pedidos|length == 0%}
-        <div style="display: flex; flex: 1; justify-content: center; align-items: center; height: 65vh">
-            <h1>Vazio</h1>
-        </div>
-        {% else %}
-        
-        {% for pedido in pedidos %}
-            <div class="col-xl-3 col-md-6 mb-4">
-                {% if pedido.status_do_pedido == 'pendente'%}
-                <div class="card border-left-danger shadow h-100 py-2">
-                {% elif pedido.status_do_pedido == 'preparando' %}
-                <div class="card border-left-warning shadow h-100 py-2">
-                {% else %}
-                <div class="card border-left-success shadow h-100 py-2">
-                {% endif%}
+<h1 class="text-center alert alert-info">Pedidos da Cozinha</h1>
+
+    <div class="row" id="app">
+            <div class="col-xl-3 col-md-6 mb-4" v-for="pedido in pedidos">
+                <div class="card shadow h-100 py-2" :class="{ 'border-left-danger': pedido.status_do_pedido === 'pendente', 'border-left-warning': pedido.status_do_pedido === 'preparando' }">
+                
                     <div class="card-body">
                         <div>
-                            <h3><strong>Mesa: {{pedido.numero_da_mesa}}</strong></h3>
-                            <h3><strong>Cliente: {{pedido.nome_do_cliente}}</strong></h3>
+                            <h3><strong>Mesa: [[pedido.numero_da_mesa]]</strong></h3>
+                            <h3><strong>Cliente: [[pedido.nome_do_cliente]]</strong></h3>
                         </div>
                     <div>
-                        <h3><strong>Status: {{pedido.status_do_pedido}}</strong></h3>
+                        <h3><strong>Status: [[pedido.status_do_pedido]]</strong></h3>
                     </div>
                 </div>
                 <div class="col no-gutters align-items-center">
                     <div class="col">
                         <div class="d-flex justify-content-between">
                             <div class="text-xs font-weight-bold text-uppercase">
-                                <p>{{pedido.data_do_pedido|date:"d/m/Y - H:i"  }}</p>    
+                                <p>[[pedido.data_do_pedido]]</p>    
                             </div>
-                            <a href="{% url 'pedidos-detalhe-cozinha' pedido.pk %}"class="btn btn-primary btn-sm text-uppercase">Detalhes</a>
+                            <a :href=" '/pedidos-detalhe-cozinha/' + pedido.id" class="btn btn-primary btn-sm text-uppercase">Detalhes</a>
                       
                         </div>
                     </div>
@@ -44,7 +32,54 @@
                 
                 </div>
             </div>
-        {% endfor %}
-        {% endif%}
+
+        <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <!-- JavaScript Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    
+    <script>
+
+        vueApp = new Vue({
+          el: "#app",
+          delimiters: ["[[", "]]"],
+          data() {
+            return {
+              pedidos: [],
+            };
+          },
+        });
+  
+        const socket = new WebSocket(`ws://${window.location.host}/ws/socket-server/`);
+        const notificationSound = new Audio('not.mp3');
+        notificationSound.load();
+        socket.onopen = function(e){
+          socket.send(JSON.stringify({
+            action: "list",
+            request_id: new Date().getTime()
+          }))
+        };
+  
+        socket.onmessage = function(event) {
+            const AllPedidos = JSON.parse(event.data);
+            
+            if(AllPedidos.action === "list" ){
+              vueApp.$data.pedidos = AllPedidos.data;
+              vueApp.$forceUpdate();
+            }
+            if(AllPedidos.action === "create"){
+              vueApp.$data.pedidos.push(AllPedidos.data);
+              notificationSound.play();
+            }
+        };
+      </script>
     </div>
 {% endblock %}

@@ -29,12 +29,16 @@ Pedido - {{pedido_detalhe.nome_do_cliente}}
           <tbody>
               <tr>
                 <th scope="row">{{pedido_detalhe.pk}}</th>
-                <td>{{pedido_detalhe.pedidos}}</td>
+                <td>
+                  {% for i in list_pedidos %}
+                    <p>{{i}} - {{i.valor_do_produto}}</p>
+                  {% endfor %}
+                </td>
                 <td>{{pedido_detalhe.valor_da_compra}}</td>
                 <form method="post">{% csrf_token %}
                   
                   <td>
-                    <select name="status_de_pagamento" id="id_status_de_pagamento">
+                    <select name="status_de_pagamento" id="id_status_de_pagamento" class="form-select">
                       <option value="" selected="">{{pedido_detalhe.status_de_pagamento}}</option>
                       {% if pedido_detalhe.status_de_pagamento == 'pago'%}
                         <option value="pendente">Pendente</option>
