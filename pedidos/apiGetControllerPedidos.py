@@ -6,11 +6,12 @@ from rest_framework.decorators import api_view
 from pedidos.models import Pedidos
 from pedidos.serializers import PedidosSerializer
 from rest_framework.permissions import IsAuthenticated
+from django.db.models import Q
 
 class PedidosList(APIView):
     
     def get(self, request):
-        pedidos = Pedidos.objects.all()
+        pedidos = Pedidos.objects.filter(Q(status_do_pedido='pendente') | Q(status_do_pedido='preparando'))
         serializer = PedidosSerializer(pedidos, many=True)
         return Response(serializer.data)
 

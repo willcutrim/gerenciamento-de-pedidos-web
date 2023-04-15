@@ -12,10 +12,10 @@
 
 {% block content %}
   <div class="col-12">
-    <div class="row" style="gap: 10px; justify-content: center;">
+    <div class="row" style="gap: 10px; justify-content: space-between;">
     {% for produto in produtos%}
       <div class="card" style="width: 12rem;">
-        <div class="container" style="background-color: #D9D9D9; box-shadow: 1px 1px 4px #bfbfbf;">
+        <div class="container" style="background-color: #D9D9D9; box-shadow: 1px 1px 4px #bfbfbf; margin-top: 10px">
           <div class="col">
             <img class="card-img-top" style="width: 120px; height: 140px; object-fit: contain;" src="{{ produto.photo_do_produto.url }}" alt="Card image prod">
           </div>

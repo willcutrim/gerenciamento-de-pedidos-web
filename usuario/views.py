@@ -3,28 +3,33 @@ from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, logout as logout_django, login as login_django
-
-
+from django.contrib import messages
+from .forms import CadastroForm
 
 
 @login_required(login_url="/usuario/login/")
 def cadastro_usuario(request):
     
     if request.method == 'POST':
+        form = CadastroForm(request.POST or None)
         try:
             usuario_exists = User.objects.get(email=request.POST.get('email'))
             if usuario_exists:
-                return 'usuario ja existe'
+                messages.warning(request, 'Este e-mail já está sendo utilizado!')
+                
         except User.DoesNotExist:
-            username = request.POST.get('username')
-            email = request.POST.get('email')
-            password = request.POST.get('password')
+            if form.is_valid():
+                username = request.POST.get('username')
+                email = request.POST.get('email')
+                password = request.POST.get('password')
 
-            novo_usuario = User.objects.create_user(username=username, email=email, password=password)
-            novo_usuario.save()
-            
-            return redirect('/') 
-    return render(request, 'html/cadastro_usuario.html')
+                novo_usuario = User.objects.create_user(username=username, email=email, password=password)
+                novo_usuario.save()
+                
+                messages.success(request, 'Usuário criado com sucesso!')
+    else: 
+        form = CadastroForm()
+    return render(request, 'html/cadastro_usuario.html', {'form': form})
 
 
 @login_required(login_url="/usuario/login/")
